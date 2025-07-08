@@ -1,0 +1,73 @@
+@import 'tailwindcss';
+@import '@fontsource/fira-mono';
+
+@theme {
+	--color-primary: #8a3bd5;
+	--color-secondary: #26204d;
+	--color-gold: #c9a340;
+}
+
+@keyframes glow {
+	from {
+		box-shadow: 0 0 20px rgba(138, 59, 213, 0.3);
+	}
+	to {
+		box-shadow:
+			0 0 30px rgba(138, 59, 213, 0.6),
+			0 0 40px rgba(138, 59, 213, 0.3);
+	}
+}
+
+@keyframes bounce-subtle {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-5px);
+	}
+}
+
+@keyframes slide-in-left {
+	from {
+		opacity: 0;
+		transform: translateX(-100px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes slide-in-right {
+	from {
+		opacity: 0;
+		transform: translateX(100px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes scale-in {
+	from {
+		opacity: 0;
+		transform: scale(0.9);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}

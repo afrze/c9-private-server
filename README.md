@@ -1,2 +1,8 @@
-# c9-private-server
-All the files needed to maintain a private server for the game Continent of Ninth Seal.
+# Continent of the Ninth Dark - Private Server
+
+This repo contains all the setup and addition content created after the initial release.
+
+- Database
+- Client
+- Server
+- Web
