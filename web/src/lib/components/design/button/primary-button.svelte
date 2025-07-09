@@ -1,4 +1,5 @@
 <script lang="ts">
+	/* Runes-style props */
 	import type { Snippet } from 'svelte';
 
 	interface PropsType {
@@ -7,25 +8,91 @@
 		disabled?: boolean;
 		loading?: boolean;
 		success?: boolean;
+		left?: Snippet;
+		right?: Snippet;
+		type?: 'submit' | 'button'
 		onclick?: () => void;
 	}
 
-	const { children, class: className, disabled, onclick }: PropsType = $props();
-
-	const _class = [
-		'rounded-lg font-semibold text-center transition-all duration-300 cursor-pointer',
-		'transform hover:scale-105 hover:-translate-y-1 active:scale-95 active:translate-y-0',
-		'disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none',
-		'relative overflow-hidden group',
-		'bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/25',
-		'hover:shadow-xl hover:shadow-primary/40 animate-glow',
-		className
-	];
+	const {
+		children,
+		class: className = '',
+		disabled = false,
+		onclick,
+		left,
+		right,
+		type = 'button'
+	}: PropsType = $props();
 </script>
 
-<button class={_class} {onclick} {disabled}>
-	<span
-		class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"
-	></span>
+<button class={`primary-btn ${className}`} {onclick} {disabled} {type} aria-disabled={disabled}>
+	<span class="beam"></span>
+	{@render left?.()}
 	{@render children?.()}
+	{@render right?.()}
 </button>
+
+<style>
+	:root {
+		--primary: #8a3bd5;
+	}
+	.primary-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: .75rem;
+		padding: 0.75rem 1.5rem;
+		border-radius: 0.5rem;
+		font-weight: 600;
+		color: #fff;
+		background: var(--primary);
+
+		animation: primary-glow 2s ease-in-out infinite alternate;
+		transition: transform 0.3s ease;
+		position: relative;
+		overflow: hidden;
+		cursor: pointer;
+		user-select: none;
+	}
+
+	.primary-btn:hover {
+		transform: translateY(-2px) scale(1.05);
+	}
+	.primary-btn:active {
+		transform: translateY(0) scale(0.97);
+	}
+
+	.primary-btn .beam {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+		transform: translateX(-100%);
+		transition: transform 0.7s ease;
+		pointer-events: none;
+	}
+	.primary-btn:hover .beam {
+		transform: translateX(100%);
+	}
+
+	.primary-btn[disabled],
+	.primary-btn[aria-disabled='true'] {
+		opacity: 0.5;
+		cursor: not-allowed;
+		animation: none;
+		transform: none;
+	}
+
+	@keyframes primary-glow {
+		0%,
+		100% {
+			box-shadow:
+				0 0 6px rgba(138, 59, 213, 0.6),
+				0 0 12px rgba(138, 59, 213, 0.4);
+		}
+		50% {
+			box-shadow:
+				0 0 10px rgba(138, 59, 213, 0.8),
+				0 0 24px rgba(138, 59, 213, 0.6);
+		}
+	}
+</style>

@@ -7,7 +7,7 @@
 	--color-gold: #c9a340;
 }
 
-@keyframes glow {
+/* @keyframes glow {
 	from {
 		box-shadow: 0 0 20px rgba(138, 59, 213, 0.3);
 	}
@@ -70,4 +70,4 @@
 		opacity: 1;
 		transform: scale(1);
 	}
-}
+} */

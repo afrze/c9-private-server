@@ -1,2 +1,4 @@
 import Button from './button.svelte';
-export { Button };
+import DiscordButton from './discord-button.svelte';
+import DownloadButton from './download-button.svelte';
+export { Button, DiscordButton, DownloadButton };

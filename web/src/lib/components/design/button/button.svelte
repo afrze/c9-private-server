@@ -7,7 +7,8 @@
 	interface PropsType {
 		loading?: boolean;
 		disabled?: boolean;
-		type?: 'primary' | 'secondary';
+		variant?: 'primary' | 'secondary';
+		type?: 'button' | 'submit';
 		class?: string;
 		left?: Snippet;
 		right?: Snippet;
@@ -17,27 +18,23 @@
 
 	const {
 		loading,
-		type = 'primary',
+		type = 'button',
+		variant = 'primary',
 		class: className,
 		children,
-		onclick
+		onclick,
+		left,
+		right
 	}: PropsType = $props();
 </script>
 
-{#snippet loader(color: string)}
-	<span>
-		<Loader {color} />
-	</span>
-{/snippet}
-
-
-{#if type === 'primary'}
-	<PrimaryButton disabled={loading} class={className} {onclick} {loading} >
+{#if variant === 'primary'}
+	<PrimaryButton disabled={loading} class={className} {onclick} {loading} {left} {right}>
 		{@render children?.()}
 	</PrimaryButton>
 {/if}
 
-{#if type === 'secondary'}
+{#if variant === 'secondary'}
 	<SecondaryButton disabled={loading} class={className} {onclick} {loading}>
 		{@render children?.()}
 	</SecondaryButton>
