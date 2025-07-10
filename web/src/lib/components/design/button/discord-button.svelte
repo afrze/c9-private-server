@@ -55,7 +55,7 @@
 		transform: translateX(100%);
 	}
 
-    @keyframes discord-glow {
+	@keyframes discord-glow {
 		0%,
 		100% {
 			box-shadow:

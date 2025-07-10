@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Hero from "$lib/components/ui/hero/hero.svelte";
-	import Login from "$lib/components/ui/login/login.svelte";
+	import Hero from '$lib/components/ui/hero/hero.svelte';
+	import Login from '$lib/components/ui/login/login.svelte';
 </script>
 
 <svelte:head>
@@ -10,9 +10,5 @@
 
 <section class="flex h-full w-full items-center gap-20">
 	<Hero />
-	<aside>
-		<Login />
-	</aside>
+	<Login />
 </section>
-
-

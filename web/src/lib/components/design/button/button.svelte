@@ -29,13 +29,13 @@
 </script>
 
 {#if variant === 'primary'}
-	<PrimaryButton disabled={loading} class={className} {onclick} {loading} {left} {right}>
+	<PrimaryButton disabled={loading} class={className} {onclick} {loading} {left} {right} {type}>
 		{@render children?.()}
 	</PrimaryButton>
 {/if}
 
 {#if variant === 'secondary'}
-	<SecondaryButton disabled={loading} class={className} {onclick} {loading}>
+	<SecondaryButton disabled={loading} class={className} {onclick} {loading} {type}>
 		{@render children?.()}
 	</SecondaryButton>
 {/if}

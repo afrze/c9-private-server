@@ -1,10 +1,31 @@
 <script lang="ts">
+	import Lock from '$lib/assets/icons/lock.svelte';
+	import Mail from '$lib/assets/icons/mail.svelte';
 	import Button from '$lib/components/design/button/button.svelte';
+	import { Card } from '$lib/components/design/card';
+	import { Form, Label } from '$lib/components/design/form';
+	import Input from '$lib/components/design/form/input.svelte';
+	import Flame from '../flame/flame.svelte';
 
 	let email = '';
 	let password = '';
 	let loading = false;
 	let errorMsg = '';
+
+	const _mailIconClass = [
+		'icon absolute left-3 top-1/2 -translate-y-3/5 w-5 h-5',
+		'text-gray-400 transition-colors duration-200 group-focus-within:text-primary'
+	];
+
+	const _passwordIconClass = [
+		'icon absolute left-3 top-1/2 -translate-y-3/5 w-5 h-5',
+		'text-gray-400 transition-colors duration-200 group-focus-within:text-primary'
+	];
+
+	const _errorMessageClass = [
+		'rounded-lg p-3 animate-scale-in absolute top-0 left-0 w-full',
+		'text-red-400 text-sm text-center bg-red-400/10 border border-red-400/20'
+	];
 
 	function handleSubmit(e: Event) {
 		e.preventDefault();
@@ -21,79 +42,50 @@
 		errorMsg = '';
 		loading = true;
 		setTimeout(() => (loading = false), 1200);
+		console.log('Submitted', email, password);
 	}
 </script>
 
-<div class="card p-8 w-full max-w-md">
-	<div class="text-center mb-6">
-		<span class="icon w-12 h-12 mx-auto mb-4"></span>
-		<h2 class="text-2xl font-bold text-white mb-2">Welcome Back</h2>
-		<p class="text-gray-300">Sign in to your account</p>
-	</div>
+{#snippet mail()}
+	<span class={_mailIconClass}>
+		<Mail width={22} height={22} />
+	</span>
+{/snippet}
 
-	<form on:submit={handleSubmit} class="space-y-4">
-		<div>
-			<label class="block text-sm font-medium text-gray-300 mb-2" for="email">Email Address</label>
-			<div class="relative group">
-				<span
-					class="icon absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 transition-colors duration-200 group-focus-within:text-primary"
-				></span>
-				<input
-					type="text"
-					bind:value={email}
-					class="w-full pl-10 pr-4 py-3 bg-surface/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/50 transition-all duration-300 hover:bg-surface/70"
-					placeholder="Enter your email"
-					disabled={loading}
-					name="email"
-				/>
-			</div>
+{#snippet lock()}
+	<span class={_passwordIconClass}>
+		<Lock width={22} height={22} />
+	</span>
+{/snippet}
+
+<aside class="w-[420px]">
+	<Card class="p-8 flex justify-between items-center gap-5 mb-5">
+		<Flame />
+		<div class="text-center w-full">
+			<span class="icon w-12 h-12 mx-auto mb-4"></span>
+			<h2 class="text-2xl font-bold text-gold mb-2">Welcome to C9 Dark</h2>
+			<p class="text-white">Sign in to your account</p>
 		</div>
-
-		<div>
-			<label class="block text-sm font-medium text-gray-300 mb-2" for="password">Password</label>
-			<div class="relative group">
-				<span
-					class="icon absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 transition-colors duration-200 group-focus-within:text-primary"
-				></span>
-				<input
-					type="password"
-					bind:value={password}
-					class="w-full pl-10 pr-4 py-3 bg-surface/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/50 transition-all duration-300 hover:bg-surface/70"
-					placeholder="Enter your password"
-					disabled={loading}
-					name="password"
-				/>
+	</Card>
+	<Card class="py-12 px-10 relative">
+		<Form onsubmit={handleSubmit}>
+			<div class="mb-8">
+				<Label for="email">Email Address</Label>
+				<Input {loading} left={mail} bind:value={email} type={'text'} id={'email'} />
 			</div>
-		</div>
 
-		{#if errorMsg}
-			<div
-				class="text-red-400 text-sm text-center bg-red-400/10 border border-red-400/20 rounded-lg p-3 animate-scale-in"
-			>
-				{errorMsg}
+			<div class="mb-8">
+				<Label for="password">Password</Label>
+				<Input {loading} left={lock} bind:value={password} type={'password'} id={'password'} />
 			</div>
-		{/if}
 
-		<Button variant="primary" type="submit" class="w-full justify-center">Login</Button>
-	</form>
+			<Button variant="primary" type="submit" class="w-full justify-center mt-4">Login</Button>
 
-	<div class="mt-6 text-center">
-		<p class="text-gray-400 text-sm animate-fade-in" style="animation-delay:0.5s">
-			Use any email and password to demo the login
-		</p>
-	</div>
-</div>
-
-<style>
-	:root {
-		--surface: #26204d;
-		--primary: #8a3bd5;
-	}
-	.card {
-		border-radius: 1rem;
-		background: hsla(248, 41%, 21%, 0.6);
-		backdrop-filter: blur(1rem);
-		box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-		transition: all 0.3s ease;
-	}
-</style>
+			{#if errorMsg}
+				<div class={_errorMessageClass}>
+					{errorMsg}
+				</div>
+			{/if}
+		</Form>
+	</Card>
+</aside>

@@ -5,5 +5,5 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
 	server: { port: 3003 },
-	plugins: [sveltekit(), devtoolsJson(), tailwindcss(),]
+	plugins: [sveltekit(), devtoolsJson(), tailwindcss()]
 });

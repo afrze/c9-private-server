@@ -10,12 +10,13 @@
 <style>
 	:root {
 		--hero-image: url('/bg.png');
-		--overlay: hsla(0, 0%, 0%, 0.70);
+		--overlay: hsla(0, 0%, 0%, 0.7);
 	}
 
-	
 	main {
-		background: linear-gradient(var(--overlay), var(--overlay)), var(--hero-image) center/cover no-repeat;
+		background:
+			linear-gradient(var(--overlay), var(--overlay)),
+			var(--hero-image) center/cover no-repeat;
 		color: #f3f3f3;
 		font-family: 'Poppins', sans-serif;
 	}
