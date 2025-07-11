@@ -6,7 +6,8 @@
         "gdrive",
         "neoconfetti",
         "njsproj",
-        "ntvs"
+        "ntvs",
+        "Vite"
     ],
     "css.validate": false,
 }

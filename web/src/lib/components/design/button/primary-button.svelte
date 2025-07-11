@@ -95,4 +95,10 @@
 				0 0 24px rgba(138, 59, 213, 0.6);
 		}
 	}
+
+	@media (max-width: 540px) {
+		.hide {
+			display: none;
+		}
+	}
 </style>

@@ -52,16 +52,16 @@
 	</span>
 {/snippet}
 
-<aside class="w-[420px]">
-	<Card class="p-8 flex justify-between items-center gap-5 mb-5">
+<aside class="w-[420px] md:w-[380px] top">
+	<Card class="p-8 flex justify-between items-center gap-5 mb-5 md:px-8 md:py-5">
 		<Flame />
 		<div class="text-center w-full">
 			<span class="icon w-12 h-12 mx-auto mb-4"></span>
-			<h2 class="text-2xl font-bold text-gold mb-2">Welcome to C9 Dark</h2>
-			<p class="text-white">Sign in to your account</p>
+			<h2 class="text-2xl md:text-xl font-bold text-gold mb-2">Welcome to C9 Dark</h2>
+			<p class="text-white md:text-sm">Sign in to your account</p>
 		</div>
 	</Card>
-	<Card class="py-12 px-10 relative">
+	<Card class="py-12 px-10 relative md:py-8 md:px-6">
 		<Form onsubmit={handleSubmit}>
 			<div class="mb-8">
 				<Label for="email">Username</Label>
@@ -97,3 +97,11 @@
 		</Form>
 	</Card>
 </aside>
+
+<style>
+	@media (max-width: 540px) {
+		.top {
+			display: none;
+		}
+	}
+</style>

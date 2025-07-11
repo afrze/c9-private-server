@@ -4,12 +4,15 @@
 	interface PropsType {
 		href?: string;
 		onclick?: () => void;
+		class?: string;
 	}
 
-	const { href, onclick }: PropsType = $props();
+	const { href, onclick, class: className }: PropsType = $props();
+
+	const _warp = ['w-full', className];
 </script>
 
-<div class="w-full">
+<div class={_warp}>
 	<a
 		{href}
 		{onclick}
@@ -82,6 +85,12 @@
 			box-shadow:
 				0 0 10px rgba(201, 163, 64, 0.8),
 				0 0 24px rgba(201, 163, 64, 0.6);
+		}
+	}
+
+	@media (max-width: 540px) {
+		.hide {
+			display: none;
 		}
 	}
 </style>

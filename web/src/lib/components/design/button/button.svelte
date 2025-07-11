@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { Loader } from '$lib/assets/icons';
 	import type { Snippet } from 'svelte';
 	import PrimaryButton from './primary-button.svelte';
 	import SecondaryButton from './secondary-button.svelte';

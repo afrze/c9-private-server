@@ -59,7 +59,7 @@
 
 <Form onsubmit={handleSubmit}>
 	<div class="mb-8">
-		<Label for="email">Email Address</Label>
+		<Label for="email">Username</Label>
 		<Input
 			{loading}
 			left={user}
