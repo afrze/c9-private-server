@@ -1,3 +1,4 @@
 import Form from './form.svelte';
 import Label from './label.svelte'
-export { Form, Label };
+import Input from './input.svelte';
+export { Form, Label, Input };

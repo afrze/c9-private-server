@@ -1,18 +1,16 @@
 <script lang="ts">
-	import Lock from '$lib/assets/icons/lock.svelte';
-	import Mail from '$lib/assets/icons/mail.svelte';
-	import Button from '$lib/components/design/button/button.svelte';
+	import { Lock, User } from '@lucide/svelte';
+	import { Button } from '$lib/components/design/button/';
 	import { Card } from '$lib/components/design/card';
-	import { Form, Label } from '$lib/components/design/form';
-	import Input from '$lib/components/design/form/input.svelte';
+	import { Form, Label, Input } from '$lib/components/design/form';
 	import Flame from '../flame/flame.svelte';
 
-	let email = '';
+	let username = '';
 	let password = '';
 	let loading = false;
 	let errorMsg = '';
 
-	const _mailIconClass = [
+	const _userIconClass = [
 		'icon absolute left-3 top-1/2 -translate-y-3/5 w-5 h-5',
 		'text-gray-400 transition-colors duration-200 group-focus-within:text-primary'
 	];
@@ -30,25 +28,21 @@
 	function handleSubmit(e: Event) {
 		e.preventDefault();
 
-		if (!email || !password) {
+		if (!username || !password) {
 			errorMsg = 'Please fill in all fields';
-			return;
-		}
-		if (!email.includes('@')) {
-			errorMsg = 'Please enter a valid email address';
 			return;
 		}
 
 		errorMsg = '';
 		loading = true;
 		setTimeout(() => (loading = false), 1200);
-		console.log('Submitted', email, password);
+		console.log('Submitted', username, password);
 	}
 </script>
 
-{#snippet mail()}
-	<span class={_mailIconClass}>
-		<Mail width={22} height={22} />
+{#snippet user()}
+	<span class={_userIconClass}>
+		<User width={22} height={22} />
 	</span>
 {/snippet}
 
@@ -70,13 +64,27 @@
 	<Card class="py-12 px-10 relative">
 		<Form onsubmit={handleSubmit}>
 			<div class="mb-8">
-				<Label for="email">Email Address</Label>
-				<Input {loading} left={mail} bind:value={email} type={'text'} id={'email'} />
+				<Label for="email">Username</Label>
+				<Input
+					{loading}
+					left={user}
+					bind:value={username}
+					type={'text'}
+					id={'email'}
+					placeholder={'Enter your username'}
+				/>
 			</div>
 
 			<div class="mb-8">
 				<Label for="password">Password</Label>
-				<Input {loading} left={lock} bind:value={password} type={'password'} id={'password'} />
+				<Input
+					{loading}
+					left={lock}
+					bind:value={password}
+					type={'password'}
+					id={'password'}
+					placeholder={'Enter your password'}
+				/>
 			</div>
 
 			<Button variant="primary" type="submit" class="w-full justify-center mt-4">Login</Button>

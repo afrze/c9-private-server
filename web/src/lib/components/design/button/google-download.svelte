@@ -1,64 +1,43 @@
-<script lang="ts">
-	import Favicon from '$lib/assets/images/favicon.ico';
+<script>
+	import Google from '$lib/assets/icons/google.svelte';
 
-	interface PropsType {
-		href?: string;
-		onclick?: () => void;
-	}
-
-	const { href, onclick }: PropsType = $props();
+	const { href } = $props();
 </script>
 
-<div class="w-full">
-	<a
-		{href}
-		{onclick}
-		target="_blank"
-		class="download-btn w-full"
-		role="button"
-		tabindex="0"
-		onkeydown={(e) => {
-			if (e.key === 'Enter') return;
-		}}
-	>
-		<div class="w-8 h-8">
-			<img src={Favicon} alt="icon" />
-		</div>
-		Download the Game
-	</a>
-</div>
+<a {href} target="_blank" class="gdrive-btn btn-base">
+	<Google width={24} height={24} />
+	Google Drive
+</a>
 
 <style>
 	:root {
-		--gold: #c9a24044;
+		--gd-gold: #c9a340;
 	}
 
-	.download-btn {
+	.btn-base {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.5rem;
+		gap: 0.6rem;
 		padding: 0.75rem 1.5rem;
 		border-radius: 0.5rem;
 		font-weight: 600;
 		color: #fff;
-		background: var(--gold);
-		animation: gold-glow 2s ease-in-out infinite alternate;
-
-		transition: transform 0.3s ease;
 		position: relative;
 		overflow: hidden;
 		cursor: pointer;
 		user-select: none;
+		transition: transform 0.3s ease;
 	}
 
-	.download-btn:hover {
+	.btn-base:hover {
 		transform: translateY(-2px) scale(1.05);
 	}
-	.download-btn:active {
+
+	.btn-base:active {
 		transform: translateY(0) scale(0.97);
 	}
 
-	.download-btn::after {
+	.btn-base::after {
 		content: '';
 		position: absolute;
 		inset: 0;
@@ -67,11 +46,17 @@
 		transition: transform 0.7s ease;
 		pointer-events: none;
 	}
-	.download-btn:hover::after {
+
+	.btn-base:hover::after {
 		transform: translateX(100%);
 	}
 
-	@keyframes gold-glow {
+	.gdrive-btn {
+		background: var(--gd-gold) / 80;
+		animation: gd-glow 2s ease-in-out infinite alternate;
+	}
+
+	@keyframes gd-glow {
 		0%,
 		100% {
 			box-shadow:

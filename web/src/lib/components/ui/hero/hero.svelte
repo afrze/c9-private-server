@@ -1,14 +1,38 @@
 <script lang="ts">
 	import Logo from '$lib/assets/images/logo.png';
+	import { Modal } from '$lib/components/design/modal';
+	import Register from '../register/register.svelte';
 	import { Button, DiscordButton, DownloadButton } from '$lib/components/design/button/';
-	import Register from '$lib/assets/icons/register.svelte';
+	import { UserPlus } from '@lucide/svelte';
+	import Download from '../download/download.svelte';
+
+	let registerModalOpen = false;
+	let downloadModalOpen = false;
 </script>
 
-{#snippet register()}
+{#snippet add_user()}
 	<span>
-		<Register />
+		<UserPlus />
 	</span>
 {/snippet}
+
+<Modal
+	isOpen={registerModalOpen}
+	title="Register"
+	onClose={() => (registerModalOpen = false)}
+	class="max-w-1/4"
+>
+	<Register />
+</Modal>
+
+<Modal
+	isOpen={downloadModalOpen}
+	title="Download the client"
+	onClose={() => (downloadModalOpen = false)}
+	class="max-w-1/3"
+>
+	<Download />
+</Modal>
 
 <article class="w-1/2 flex flex-col items-end p-20">
 	<div class="w-[320px] transition-all animate-float">
@@ -19,10 +43,13 @@
 	</h1>
 	<div class="flex flex-col gap-5">
 		<DiscordButton href="https://discord.gg/pHhHyP56M3" />
-		<DownloadButton
-			href="https://drive.google.com/file/d/1bzkMMPHjw2hxd0RJc4eOENszfr63tdUF/view?usp=drive_link"
-		/>
-		<Button variant="primary" class="w-full p-[0.75rem]" left={register}>Create an account</Button>
+		<DownloadButton onclick={() => (downloadModalOpen = true)} />
+		<Button
+			variant="primary"
+			class="w-full p-[0.75rem]"
+			left={add_user}
+			onclick={() => (registerModalOpen = true)}>Create an account</Button
+		>
 	</div>
 </article>
 
