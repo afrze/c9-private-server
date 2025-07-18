@@ -25,7 +25,7 @@ func InitMongo(uri string) *mongo.Database {
 
 	log.Println("[db] Connected to MongoDB")
 
-	db := client.Database("")
+	db := client.Database("c9web")
 
 	return db
 }

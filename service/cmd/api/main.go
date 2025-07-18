@@ -7,10 +7,12 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/gin-gonic/gin"
+
 	"github.com/afrze/c9-private-server/service/internal/config"
 	"github.com/afrze/c9-private-server/service/internal/ctx"
 	"github.com/afrze/c9-private-server/service/internal/db"
-	"github.com/gin-gonic/gin"
+	"github.com/afrze/c9-private-server/service/internal/handlers"
 )
 
 func main() {
@@ -26,6 +28,9 @@ func main() {
 	r := gin.New()
 	r.SetTrustedProxies(nil)
 	r.Use(gin.Logger(), gin.Recovery())
+
+	api := r.Group("/api")
+	handlers.RegisterRoutes(api, &ctx)
 
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(200, gin.H{"status": "ok"})
