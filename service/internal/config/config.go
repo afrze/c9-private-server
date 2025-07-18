@@ -6,5 +6,6 @@ type Config struct {
 	MSSQLConn  string `mapstructure:"MSSQL_CONN"`
 	JWTSecret  string `mapstructure:"JWT_SECRET"`
 	JWTExpiry  int    `mapstructure:"JWT_EXPIRY_MIN"` // minutes
-	RateLimit  int    `mapstructure:"RATE_LIMIT"`     // Requests-per-minute throttle
+	RateLimit  int    `mapstructure:"RATE_LIMIT"`     // requests-per-minute throttle
+	GinMode    string `mapstructure:"GIN_MODE"`
 }

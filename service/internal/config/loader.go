@@ -20,10 +20,12 @@ func Load() Config {
 	v.BindEnv("MONGODB_URI")
 	v.BindEnv("MSSQL_CONN")
 	v.BindEnv("JWT_SECRET")
+	v.BindEnv("GIN_MODE")
 
 	v.SetDefault("LISTEN_ADDR", ":9009")
 	v.SetDefault("JWT_EXPIRY_MIN", 60)
 	v.SetDefault("RATE_LIMIT", 60)
+	v.SetDefault("GIN_MODE", "debug")
 
 	_ = v.ReadInConfig()
 
