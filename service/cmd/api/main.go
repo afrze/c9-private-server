@@ -13,6 +13,7 @@ import (
 	"github.com/afrze/c9-private-server/service/internal/ctx"
 	"github.com/afrze/c9-private-server/service/internal/db"
 	"github.com/afrze/c9-private-server/service/internal/handlers"
+	"github.com/afrze/c9-private-server/service/internal/middleware"
 )
 
 func main() {
@@ -29,8 +30,10 @@ func main() {
 	r.SetTrustedProxies(nil)
 	r.Use(gin.Logger(), gin.Recovery())
 
+	r.Use(middleware.CORS())
+
 	api := r.Group("/api")
-	handlers.RegisterRoutes(api, &ctx)
+	handlers.RegisterRoutes(api, &ctx, cfg.JWTSecret, cfg.JWTExpiry)
 
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(200, gin.H{"status": "ok"})
